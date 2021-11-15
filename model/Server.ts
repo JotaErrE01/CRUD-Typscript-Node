@@ -4,7 +4,7 @@ import cors from 'cors';
 // en las importacioes por defecto podemos definir alias
 import userRoutes from '../routes/usuario';
 import db from '../db/dbConfig';
-import Usuario from './Usuario';
+import './Usuario'; // ejecuta el codigo del modulo pero no importa ningun valor
 
 
 class Server {
@@ -26,11 +26,10 @@ class Server {
 
     async dbConection() {
         try {
-            
-            await db.authenticate();
-            await Usuario.sync(); //-> crar tabla en la base de datos
+            await db.authenticate(); // -> testea la conexion            
+            await db.sync(); //-> crea todas las tablas de la base de datos, siempre y cuando ejecutes el modulo donde se encuentran
+            // await Usuario.sync(); //-> crar tabla en la base de datos
             console.log('Connections has been establish successfully');
-            
 
         } catch ( error: any ) {
             throw new Error( error );
